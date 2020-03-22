@@ -6,14 +6,13 @@ import javax.swing.JFrame;
 public class SwingTimerEx extends JFrame {
 	public Board board;
 
-   public SwingTimerEx() {
+	public SwingTimerEx() {
         
         initUI();
         KeyListener listener = new KeyListener() {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-
 			    int code = e.getKeyCode();
 			    String key = KeyEvent.getKeyText(code); 
 			    board.key_pressed(key);
@@ -24,12 +23,10 @@ public class SwingTimerEx extends JFrame {
 				int code = e.getKeyCode();
 			    String key = KeyEvent.getKeyText(code); 
 			    board.key_released(key);
-
 			}
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-
 			}
         };
         this.addKeyListener(listener);
@@ -48,10 +45,10 @@ public class SwingTimerEx extends JFrame {
     }
 
 	public static void main(String[] args) {
-	    
-	    EventQueue.invokeLater(() -> {
-	        SwingTimerEx ex = new SwingTimerEx();
-	        ex.setVisible(true);
-	    });
+   	EventQueue.invokeLater(() -> {
+   		SwingTimerEx ex = new SwingTimerEx();
+
+   		ex.setVisible(true);
+   	});
 	}
 }
