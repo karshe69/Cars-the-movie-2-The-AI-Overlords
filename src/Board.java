@@ -22,7 +22,7 @@ public class Board extends JPanel implements ActionListener { // the board of th
 
     private Image track; // the image of the track for displaying on screen
     private static HashSet<Point> hitMap; //hash map of where you can and cannot be on screen
-    private Car car; // the car
+    private SelfDrivingCar car; // the car
     private Timer timer; // timer for looping main
 
 	public static final double FRICTION_FORWARD = 0.03; // size of the friction applied towards the car's direction
@@ -62,7 +62,7 @@ public class Board extends JPanel implements ActionListener { // the board of th
             }
         }
 
-        car = new Car(B_WIDTH / 2, B_HEIGHT / 1.15, 25, 75, 0); // creates the car
+        car = new SelfDrivingCar(B_WIDTH / 2, B_HEIGHT / 1.15, 25, 75, 0); // creates the car
         track = new ImageIcon("racetrack.png").getImage(); // creates the track
         timer = new Timer(DELAY, this); // creates the loop cycle
         timer.start(); // starts the loop cycle
