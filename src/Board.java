@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
 
-
 public class Board extends JPanel implements ActionListener { // the board of the game, which is the main part of it
 	Toolkit tk = Toolkit.getDefaultToolkit();
 

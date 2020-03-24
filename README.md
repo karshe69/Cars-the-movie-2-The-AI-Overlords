@@ -24,14 +24,14 @@ Production company KarshE69 inc.
 
 Distributed by KarshE69
 
-Release date ??
+Release date NOW
 
-Runnit timer 0
+Runnig timer NOW
 
 Country Computer
 
 Language Java
 
-Budget 0$
+Budget TOMO$
 
-Box office 0$
+Box office TOMO+1$
