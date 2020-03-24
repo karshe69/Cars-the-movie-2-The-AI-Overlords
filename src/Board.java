@@ -1,3 +1,5 @@
+import shapes.Point;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -5,6 +7,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.SynchronousQueue;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -21,7 +25,7 @@ public class Board extends JPanel implements ActionListener { // the board of th
     private final int DELAY = 1000/FPS; // time between frames
 
     private Image track; // the image of the track for displaying on screen
-    private static HashSet<Point> hitMap; //hash map of where you can and cannot be on screen
+    private static HashSet<shapes.Point> hitMap; //hash map of where you can and cannot be on screen
     private SelfDrivingCar car; // the car
     private Timer timer; // timer for looping main
 
@@ -35,6 +39,8 @@ public class Board extends JPanel implements ActionListener { // the board of th
     private Color timerColor = new Color(51, 236, 226); // color of the timer
     private Color carColor = new Color(195, 0, 195); // color of the car
     private int time = 0; // timer for displaying on screen. counts in ticks
+
+    private BlockingQueue<DistRes> queue = new SynchronousQueue<>();
 
     private boolean[] presses = new boolean[5]; // key pressing map
     
@@ -56,13 +62,13 @@ public class Board extends JPanel implements ActionListener { // the board of th
             for (int x = 0; x < hitMapImage.getWidth(); x++) {
                 for (int y = 0; y < hitMapImage.getHeight(); y++) {
                     if (hitMapImage.getRGB(x, y) == -16777216) { // if hitmap.png is black in this spot, add it to the hashmap
-                        hitMap.add(new Point(x, y));
+                        hitMap.add(new shapes.Point(x, y));
                     }
                 }
             }
         }
 
-        car = new SelfDrivingCar(B_WIDTH / 2, B_HEIGHT / 1.15, 25, 75, 0); // creates the car
+        car = new SelfDrivingCar(B_WIDTH / 2, B_HEIGHT / 1.15, 25, 75, 0, queue); // creates the car
         track = new ImageIcon("racetrack.png").getImage(); // creates the track
         timer = new Timer(DELAY, this); // creates the loop cycle
         timer.start(); // starts the loop cycle
@@ -82,8 +88,8 @@ public class Board extends JPanel implements ActionListener { // the board of th
 
     	drawTrack(g2); // draws the race track
 
-        String str = ""; //translates the ticks to an actual timer in format of hours:min:sec.milisec
-        str += String.format("%03d", (time / FPS / 360)) + ":" + String.format("%02d", (time / FPS / 60 % 60)) + ":" + String.format("%02d", (time / FPS % 60)) + "." + String.format("%03d", (time % FPS * 50 / 3));
+        String str = ""; //translates the ticks to an actual timer in format of min:sec.milisec
+        str += String.format("%03d", (time / FPS / 60)) + ":" + String.format("%02d", (time / FPS % 60)) + "." + String.format("%03d", (time % FPS * 50 / 3));
 
         g2.setColor(timerColor); // sets color for the timer
         g2.setFont(new Font("Courier", Font.BOLD,75)); // sets font and size of the timer
@@ -102,7 +108,7 @@ public class Board extends JPanel implements ActionListener { // the board of th
 
     private void collisionCheck(){ // checks for collisions made between the car and the road
         int x, y;
-        for (Point pnt:car.getEdges() // runs through the edges of the car
+        for (shapes.Point pnt:car.getEdges() // runs through the edges of the car
              ) {
             x = (int)Math.abs(pnt.getX());
             y = (int)Math.abs(pnt.getY());

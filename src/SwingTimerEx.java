@@ -39,7 +39,7 @@ public class SwingTimerEx extends JFrame {
         setResizable(false);
         pack();
         
-        setTitle("Cars the movie 1");
+        setTitle("Cars the movie 2: The AI Overlords");
         setLocationRelativeTo(null);        
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

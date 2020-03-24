@@ -1,6 +1,8 @@
+package shapes;
+
 import java.util.Objects;
 
-public class Point { // a point
+public class Point{ // a point
     protected double x; // position along the x axis
     protected double y; // position along the y axis
 

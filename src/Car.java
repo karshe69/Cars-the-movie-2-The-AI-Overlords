@@ -1,6 +1,9 @@
+import shapes.Line;
+import shapes.Point;
+
 import java.awt.Graphics2D;
 
-public class Car extends Point{ // the car~TM
+public class Car extends Point { // the car~TM
 
 	private Point[] edges = new Point[8]; // spots specified as edges which can be hit be the track
 	private Point[] points = new Point[56]; // the individual vertices that make up the car
@@ -19,10 +22,10 @@ public class Car extends Point{ // the car~TM
 	private double wheel_angle;
 
 	// 2 constants that make up the size and shape of the car
-	private double innerAngle;
-	private double innerRadius;
+	protected double innerAngle;
+	protected double innerRadius;
 
-	private double angle; // current angle of the car
+	protected double angle; // current angle of the car
 	private Vector speed; // current speed of the car
 	private double wheelAngle = 0; //angle of the wheels of the car compared to the car
 
