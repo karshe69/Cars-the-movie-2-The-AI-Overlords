@@ -1,4 +1,6 @@
 import shapes.Point;
+
+import java.awt.*;
 import java.util.concurrent.BlockingQueue;
 
 public class Sensor extends Thread{
@@ -27,6 +29,12 @@ public class Sensor extends Thread{
         this.runflag = runflag;
     }
 
+    public void draw(Graphics2D g){
+        double x = Math.cos(carAngle + relativeAngle) * 1920 + origin.getX();
+        double y = Math.sin(carAngle + relativeAngle) * 1920 + origin.getY();
+        g.drawLine((int)origin.getX(), (int)origin.getY(), (int)x, (int)y);
+    }
+
     public void run(){
         while (runflag){
             while (changeflag){
@@ -42,5 +50,17 @@ public class Sensor extends Thread{
 
     public DistRes sense(){
         return new DistRes(0, sign);
+    }
+
+    public double getCarAngle() {
+        return carAngle;
+    }
+
+    public double getRelativeAngle() {
+        return relativeAngle;
+    }
+
+    public Point getOrigin() {
+        return origin;
     }
 }

@@ -26,7 +26,7 @@ public class Car extends Point { // the car~TM
 	protected double innerRadius;
 
 	protected double angle; // current angle of the car
-	private Vector speed; // current speed of the car
+	protected Vector speed; // current speed of the car
 	private double wheelAngle = 0; //angle of the wheels of the car compared to the car
 
 	//to returns the car to its starting position when it crashes
