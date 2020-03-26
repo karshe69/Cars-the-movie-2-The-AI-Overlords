@@ -103,6 +103,7 @@ public class Board extends JPanel implements ActionListener { // the board of th
 
         g2.setColor(carColor); // sets color for the car
         car.draw(g2); // draws the car
+        car.drawSensors(g2);
     	}
 
     private void collisionCheck(){ // checks for collisions made between the car and the road

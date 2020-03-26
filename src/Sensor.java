@@ -37,10 +37,10 @@ public class Sensor extends Thread{
     }
 
     public void draw(Graphics2D g){
-        double x = Math.cos(carAngle + relativeAngle) * 1920 + origin.getX();
-        double y = Math.sin(carAngle + relativeAngle) * 1920 + origin.getY();
+        double x = pnt.getX() - origin.getX();
+        double y = pnt.getY() - origin.getY();
         g.setColor(senseColor);
-        g.drawLine((int)origin.getX(), (int)origin.getY(), (int)x, (int)y);
+        g.drawLine((int)origin.getX(), (int)origin.getY(), (int)origin.getX() + (int)x*2, (int)origin.getY() + (int)y*2);
         g.setColor(hitColor);
         g.fillOval((int)pnt.getX() - 5, (int)pnt.getY() - 5, 10, 10);
     }
