@@ -67,7 +67,7 @@ public class Board extends JPanel implements ActionListener { // the board of th
             }
         }
 
-        car = new SelfDrivingCar(B_WIDTH / 2, B_HEIGHT / 1.15, 25, 75, 0, queue); // creates the car
+        car = new SelfDrivingCar(B_WIDTH / 2.0, B_HEIGHT / 1.15, 25, 75, 0, queue, hitMap); // creates the car
         track = new ImageIcon("racetrack.png").getImage(); // creates the track
         timer = new Timer(DELAY, this); // creates the loop cycle
         timer.start(); // starts the loop cycle

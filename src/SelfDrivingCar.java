@@ -1,32 +1,32 @@
 import shapes.Point;
 
 import java.awt.*;
+import java.util.HashSet;
 import java.util.concurrent.BlockingQueue;
 
 public class SelfDrivingCar extends Car {
     private Sensor[] sensors = new Sensor[10];
 
-    public SelfDrivingCar(double x, double y, int width, int height, double angle, BlockingQueue<DistRes> queue) {
+    public SelfDrivingCar(double x, double y, int width, int height, double angle, BlockingQueue<DistRes> queue, HashSet<Point> hitMap) {
         super(x, y, width, height, angle);
 
-        sensors[0] = new Sensor(0, 0, queue);
-        sensors[1] = new Sensor(Math.PI, 1, queue);
-        sensors[2] = new Sensor(Math.PI / 8, 2, queue);
-        sensors[3] = new Sensor(- Math.PI / 8, 3, queue);
-        sensors[4] = new Sensor(Math.PI / 5, 4, queue);
-        sensors[5] = new Sensor(- Math.PI / 5, 5, queue);
-        sensors[6] = new Sensor(Math.PI / 3, 6, queue);
-        sensors[7] = new Sensor(- Math.PI / 3, 7, queue);
-        sensors[8] = new Sensor(- Math.PI * 6 / 5, 8, queue);
-        sensors[9] = new Sensor(Math.PI * 6 / 5, 9, queue);
+        sensors[0] = new Sensor(0, 0, queue, hitMap);
+        sensors[1] = new Sensor(Math.PI, 1, queue, hitMap);
+        sensors[2] = new Sensor(Math.PI / 8, 2, queue, hitMap);
+        sensors[3] = new Sensor(- Math.PI / 8, 3, queue, hitMap);
+        sensors[4] = new Sensor(Math.PI / 5, 4, queue, hitMap);
+        sensors[5] = new Sensor(- Math.PI / 5, 5, queue, hitMap);
+        sensors[6] = new Sensor(Math.PI / 3, 6, queue, hitMap);
+        sensors[7] = new Sensor(- Math.PI / 3, 7, queue, hitMap);
+        sensors[8] = new Sensor(- Math.PI * 6 / 5, 8, queue, hitMap);
+        sensors[9] = new Sensor(Math.PI * 6 / 5, 9, queue, hitMap);
+        /*for(int i = 0; i < sensors.length; i ++)
+            sensors[i].start();*/
         updatePointss();
     }
 
-    @Override
-    public void draw(Graphics2D g) {
-        super.draw(g);
-        for(int i = 0; i < sensors.length; i++)
-            sensors[i].draw(g);
+    public void drawSensors(Graphics2D g) {
+        for (Sensor sensor : sensors) sensor.draw(g);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class SelfDrivingCar extends Car {
         updatePointss(); // updates the points to the new position
     }
 
-    public void updatePointss() {
+    public void updatePointss() { // updates the positions of the points and the sensors
         super.updatePoints();
         double x1, y1, x2, y2;
         Point[] corners = new Point[4];
